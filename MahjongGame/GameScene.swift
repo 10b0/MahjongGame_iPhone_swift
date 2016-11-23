@@ -19,12 +19,12 @@ class GameScene: SKScene {
     var soundManager: Sound?
     var touchScreenText: SKLabelNode?
     
-    override func didMoveToView(view: SKView) {
+    override func didMove(to view: SKView) {
         /* Setup your scene here */
         
         backGroundSplash = SKSpriteNode(color: orangeColorBackground, size: frame.size)
         backGroundSplash!.zPosition = -20
-        backGroundSplash!.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+        backGroundSplash!.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
         
         soundManager = Sound(activeSounds: true, withMainTheme: true)
         soundManager!.playMainMusic()
@@ -35,12 +35,12 @@ class GameScene: SKScene {
     
 
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         blockUpdate = updateSplashScreen()
     }
     
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
         
         // DRAW
@@ -75,9 +75,9 @@ class GameScene: SKScene {
         touchScreenText = SKLabelNode(fontNamed: "Superclarendon-Black")
         touchScreenText!.text = "Touch screen"
         touchScreenText!.fontSize = 50
-        touchScreenText!.position = CGPointMake(CGRectGetMidX(frame), frame.size.height/5)
+        touchScreenText!.position = CGPoint(x: frame.midX, y: frame.size.height/5)
         touchScreenText!.zPosition = 10
-        touchScreenText!.fontColor = UIColor.blackColor()
+        touchScreenText!.fontColor = UIColor.black
         
         
         //background animation
@@ -90,12 +90,12 @@ class GameScene: SKScene {
         }
         
         let blue_back = SKSpriteNode(imageNamed: "blue_background1")
-        blue_back.position = CGPointMake(frame.size.width/2, frame.size.height/2)
-        blue_back.runAction(SKAction.repeatActionForever(SKAction.animateWithTextures(spritesArray, timePerFrame: 1.2)))
+        blue_back.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
+        blue_back.run(SKAction.repeatForever(SKAction.animate(with: spritesArray, timePerFrame: 1.2)))
         
         let cover = SKSpriteNode(imageNamed: "mahjong_cover")
         cover.zPosition = blue_back.zPosition + 1
-        cover.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+        cover.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
         
         addChild(backGroundSplash!)
         addChild(blue_back)
@@ -106,7 +106,7 @@ class GameScene: SKScene {
     func updateSplashScreen() -> Bool {
         soundManager!.stopMainMusic()
         soundManager!.playSound("select.m4a", scene: self)
-        let transition = SKTransition.doorsOpenHorizontalWithDuration(1.5)
+        let transition = SKTransition.doorsOpenHorizontal(withDuration: 1.5)
         let toMainMenu = MainMenuScene(size: size, music: true, mark: false)
         view?.presentScene(toMainMenu, transition: transition)
         return true

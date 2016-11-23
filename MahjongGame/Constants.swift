@@ -11,50 +11,50 @@ import SpriteKit
 let orangeColorBackground = UIColor.init(red: 0.992, green: 0.686, blue: 0.243, alpha: 1.0)
 var initState = true
 var currentState = 0
-var boardSelected = boardSet.TURTLE.hashValue
-var tilesSelected = tilesSet.ORIGINAL.hashValue
+var boardSelected = boardSet.turtle.hashValue
+var tilesSelected = tilesSet.original.hashValue
 
-let MENU_SPEED: NSTimeInterval = 1
+let MENU_SPEED: TimeInterval = 1
 
 enum gameStates {
-    case MAIN_MENU_SCREEN
-    case SELECT_BOARD_SCREEN
-    case SELECT_TOKEN_SCREEN
-    case OPTIONS_SCREEN
-    case HELP_SCREEN
-    case ABOUT_SCREEN
-    case STATE_GAMEPLAY
-    case IN_GAME_MENU
-    case IN_GAME_MENU_HELP
-    case IN_GAME_MENU_SELECT_TOKEN
+    case main_MENU_SCREEN
+    case select_BOARD_SCREEN
+    case select_TOKEN_SCREEN
+    case options_SCREEN
+    case help_SCREEN
+    case about_SCREEN
+    case state_GAMEPLAY
+    case in_GAME_MENU
+    case in_GAME_MENU_HELP
+    case in_GAME_MENU_SELECT_TOKEN
 }
 
 enum tilesSet {
-    case ORIGINAL
-    case MEMES
-    case TILES_MAX
+    case original
+    case memes
+    case tiles_MAX
 }
 
 enum boardSet {
-    case TURTLE
-    case PYRAMID
-    case SPIDER
-    case SPACE_INVADERS
-    case MS_PACMAN
-    case MARIO_BROS
-    case TETRIS
-    case BOARD_MAX
+    case turtle
+    case pyramid
+    case spider
+    case space_INVADERS
+    case ms_PACMAN
+    case mario_BROS
+    case tetris
+    case board_MAX
 }
 
 
 enum specialTokens {
-    case TOKEN_NORMAL
-    case TOKEN_DOBLE_NORTH
-    case TOKEN_DOBLE_SOUTH
-    case TOKEN_QUATUPLE_NORTH
-    case TOKEN_QUATUPLE_SOUTH
-    case TOKEN_QUATUPLE_EAST_NORTH
-    case TOKEN_QUATUPLE_EAST_SOUTH
+    case token_NORMAL
+    case token_DOBLE_NORTH
+    case token_DOBLE_SOUTH
+    case token_QUATUPLE_NORTH
+    case token_QUATUPLE_SOUTH
+    case token_QUATUPLE_EAST_NORTH
+    case token_QUATUPLE_EAST_SOUTH
 }
 
 //enum gameStates {
@@ -68,14 +68,14 @@ var backButton: SKSpriteNode?
 var stackStates = NSMutableArray()
 //var redraw = false
 
-func drawBackButton(scene: SKNode) {
+func drawBackButton(_ scene: SKNode) {
     if initState {
         backButton = TextAndButtons.createdSmallButton()
     }
-    TextAndButtons.drawButton(backButton!, text: "Back", position: CGPointMake(CGRectGetMaxX(scene.frame) - backButton!.size.width/2 - 10, backButton!.size.height/2 + 10), scene: scene)
+    TextAndButtons.drawButton(backButton!, text: "Back", position: CGPoint(x: scene.frame.maxX - backButton!.size.width/2 - 10, y: backButton!.size.height/2 + 10), scene: scene)
 }
 
-func updateBackButton(point: CGPoint, ended: Bool) {
+func updateBackButton(_ point: CGPoint, ended: Bool) {
   //  backButton!.colorBlendFactor = 1.0
     
     if TextAndButtons.checkTouch(point, button: backButton!, ended: ended) {
@@ -93,20 +93,20 @@ func pullState() {
     }
     
     stackStates.removeLastObject()
-    currentState = stackStates.lastObject!.integerValue
+    currentState = (stackStates.lastObject! as AnyObject).intValue
 
     initState = true
     
 }
 
-func changeState(newState: Int) {
+func changeState(_ newState: Int) {
     // Main Menu and In Game Menu are the root states, the first states, this not have previous stages that why the stack most be clean
-    if newState == gameStates.MAIN_MENU_SCREEN.hashValue || newState == gameStates.STATE_GAMEPLAY.hashValue {
+    if newState == gameStates.main_MENU_SCREEN.hashValue || newState == gameStates.state_GAMEPLAY.hashValue {
         stackStates = NSMutableArray()   //clean the stack
     }
     
-    let value = NSNumber(integer: newState)
-    stackStates.addObject(value)
+    let value = NSNumber(value: newState as Int)
+    stackStates.add(value)
     currentState = newState
 
     initState = true

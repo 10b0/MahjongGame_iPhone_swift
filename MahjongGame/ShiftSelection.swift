@@ -40,7 +40,7 @@ class ShiftSelection: NSObject {
         
         backGroundSelect = SKSpriteNode(color: orangeColorBackground, size: scene!.frame.size)
         backGroundSelect!.zPosition = 600
-        backGroundSelect!.position = CGPointMake(scene!.frame.size.width/2, scene!.frame.size.height/2)
+        backGroundSelect!.position = CGPoint(x: scene!.frame.size.width/2, y: scene!.frame.size.height/2)
 
     }
     
@@ -49,7 +49,7 @@ class ShiftSelection: NSObject {
         items = [SKSpriteNode]()
         selector_on = SKSpriteNode.init(imageNamed: "selector_on")
         
-        if currentState == gameStates.SELECT_BOARD_SCREEN.hashValue {
+        if currentState == gameStates.select_BOARD_SCREEN.hashValue {
             
             selection = boardSelected
             
@@ -95,12 +95,12 @@ class ShiftSelection: NSObject {
         }
         
         for i in 0..<items!.count {
-            items![i]!.position = CGPointMake(CGRectGetMaxX(scene!.frame) * CGFloat.init(i - selection) + CGRectGetMidX(scene!.frame), CGRectGetMidY(scene!.frame))
+            items![i]!.position = CGPoint(x: scene!.frame.maxX * CGFloat.init(i - selection) + scene!.frame.midX, y: scene!.frame.midY)
             items![i]!.zPosition = 601
         }
         
-        selector!.position = CGPointMake(scene!.size.width/2, items![0]!.position.y - items![0]!.size.height/2 - 30)
-        selector_on!.position = CGPointMake(scene!.size.width/2 + (initPosSelector + (spacesBetweenSelectors * CGFloat.init(selection))), items![0]!.position.y - items![0]!.size.height/2 - 30)
+        selector!.position = CGPoint(x: scene!.size.width/2, y: items![0]!.position.y - items![0]!.size.height/2 - 30)
+        selector_on!.position = CGPoint(x: scene!.size.width/2 + (initPosSelector + (spacesBetweenSelectors * CGFloat.init(selection))), y: items![0]!.position.y - items![0]!.size.height/2 - 30)
         selector!.zPosition = 601
         selector_on!.zPosition = selector!.zPosition + 1
 
@@ -116,10 +116,10 @@ class ShiftSelection: NSObject {
             createdItmes()
             
             let moveLeft = UISwipeGestureRecognizer.init(target: self, action: #selector(moveBoardLeft(_:)))
-            moveLeft.direction = .Left
+            moveLeft.direction = .left
             
             let moveRight = UISwipeGestureRecognizer.init(target: self, action: #selector(moveBoardRight(_:)))
-            moveRight.direction = .Right
+            moveRight.direction = .right
             
             scene!.view?.addGestureRecognizer(moveLeft)
             scene!.view?.addGestureRecognizer(moveRight)
@@ -132,7 +132,7 @@ class ShiftSelection: NSObject {
             
         }
         
-        TextAndButtons.drawText("Select Board", size:40, position:CGPointMake(CGRectGetMidX(scene!.frame), scene!.frame.size.height/6 * 5), scene: scene!)
+        TextAndButtons.drawText("Select Board", size:40, position:CGPoint(x: scene!.frame.midX, y: scene!.frame.size.height/6 * 5), scene: scene!)
         
         for item in items! {
             scene!.addChild(item!)
@@ -141,14 +141,14 @@ class ShiftSelection: NSObject {
         scene!.addChild(selector!)
         scene!.addChild(selector_on!)
         
-        TextAndButtons.drawButton(bigArrowLeft!, text:"", position:CGPointMake(bigArrowLeft!.size.width/2 + 10, CGRectGetMidY(scene!.frame)), scene:scene!)
-        TextAndButtons.drawButton(bigArrowRight!, text:"", position:CGPointMake(CGRectGetMaxX(scene!.frame) - bigArrowRight!.size.width/2 - 10, CGRectGetMidY(scene!.frame)), scene:scene!)
-        TextAndButtons.drawButton(selectBoardButton!, text:"Select", position:CGPointMake(CGRectGetMidX(scene!.frame), items![0]!.position.y - items![0]!.size.height/2 - 80), scene:scene!)
+        TextAndButtons.drawButton(bigArrowLeft!, text:"", position:CGPoint(x: bigArrowLeft!.size.width/2 + 10, y: scene!.frame.midY), scene:scene!)
+        TextAndButtons.drawButton(bigArrowRight!, text:"", position:CGPoint(x: scene!.frame.maxX - bigArrowRight!.size.width/2 - 10, y: scene!.frame.midY), scene:scene!)
+        TextAndButtons.drawButton(selectBoardButton!, text:"Select", position:CGPoint(x: scene!.frame.midX, y: items![0]!.position.y - items![0]!.size.height/2 - 80), scene:scene!)
         
     }
     
     
-    func updateSelectBoardScreen(point:CGPoint, ended:Bool) -> Bool{
+    func updateSelectBoardScreen(_ point:CGPoint, ended:Bool) -> Bool{
         
         updateBackButton(point, ended: ended)
         
@@ -173,7 +173,7 @@ class ShiftSelection: NSObject {
     }
     
     
-    func moveBoardLeft(gestureRecognizer: UISwipeGestureRecognizer) {
+    func moveBoardLeft(_ gestureRecognizer: UISwipeGestureRecognizer) {
         // CGPoint location = [gestureRecognizer locationInView:self.view];
         // NSLog(@"location x:%f, y:%f", location.x, location.y);
         
@@ -186,7 +186,7 @@ class ShiftSelection: NSObject {
     }
     
     
-    func moveBoardRight(gestureRecognizer: UISwipeGestureRecognizer) {
+    func moveBoardRight(_ gestureRecognizer: UISwipeGestureRecognizer) {
         //CGPoint location = [gestureRecognizer locationInView:self.view];
         // NSLog(@"location x:%f, y:%f", location.x, location.y);
         
@@ -205,42 +205,42 @@ class ShiftSelection: NSObject {
         if selection >= items!.count {
             selection = 0
             
-            selector_on!.position = CGPointMake(scene!.size.width/2 + initPosSelector, items![0]!.position.y - items![0]!.size.height/2 - 30)
+            selector_on!.position = CGPoint(x: scene!.size.width/2 + initPosSelector, y: items![0]!.position.y - items![0]!.size.height/2 - 30)
             
             for i in 0..<items!.count {
                 if i == 0 {
-                    items![i]!.runAction(SKAction.sequence([
-                        SKAction.moveToX(CGRectGetMaxX(scene!.frame) + CGRectGetMidX(scene!.frame), duration: 0),
-                        SKAction.moveToX(CGRectGetMidX(scene!.frame), duration: 0.3)]))
+                    items![i]!.run(SKAction.sequence([
+                        SKAction.moveTo(x: scene!.frame.maxX + scene!.frame.midX, duration: 0),
+                        SKAction.moveTo(x: scene!.frame.midX, duration: 0.3)]))
                 } else if i == items!.count - 1 {
-                    items![i]!.runAction(SKAction.sequence([
-                        SKAction.moveToX(items![i]!.position.x - CGRectGetMaxX(scene!.frame), duration: 0.3),
-                        SKAction.moveToX(CGRectGetMaxX(scene!.frame) * CGFloat.init(i) + CGRectGetMidX(scene!.frame), duration: 0),
-                        SKAction.runBlock({
+                    items![i]!.run(SKAction.sequence([
+                        SKAction.moveTo(x: items![i]!.position.x - scene!.frame.maxX, duration: 0.3),
+                        SKAction.moveTo(x: scene!.frame.maxX * CGFloat.init(i) + scene!.frame.midX, duration: 0),
+                        SKAction.run({
                             self.blockArrows = false
                         })]))
                 } else {
-                    items![i]!.runAction(SKAction.moveToX(CGRectGetMaxX(scene!.frame) * CGFloat.init(i) + CGRectGetMidX(scene!.frame), duration:0))
+                    items![i]!.run(SKAction.moveTo(x: scene!.frame.maxX * CGFloat.init(i) + scene!.frame.midX, duration:0))
                 }
             }
             
         } else {
             
-            selector_on!.position = CGPointMake(selector_on!.position.x + spacesBetweenSelectors, items![0]!.position.y - items![0]!.size.height/2 - 30)
+            selector_on!.position = CGPoint(x: selector_on!.position.x + spacesBetweenSelectors, y: items![0]!.position.y - items![0]!.size.height/2 - 30)
             
             for i in 0..<items!.count {
                 if i == items!.count - 1 {
-                    items![i]!.runAction(SKAction.sequence([
-                        SKAction.moveToX(items![i]!.position.x - CGRectGetMaxX(scene!.frame), duration:0.3),
-                        SKAction.runBlock({
+                    items![i]!.run(SKAction.sequence([
+                        SKAction.moveTo(x: items![i]!.position.x - scene!.frame.maxX, duration:0.3),
+                        SKAction.run({
                             self.blockArrows = false
                         })]))
                 } else {
-                    items![i]!.runAction(SKAction.moveToX(items![i]!.position.x - CGRectGetMaxX(scene!.frame), duration:0.3))
+                    items![i]!.run(SKAction.moveTo(x: items![i]!.position.x - scene!.frame.maxX, duration:0.3))
                 }
             }
         }
-        if currentState == gameStates.SELECT_BOARD_SCREEN.hashValue {
+        if currentState == gameStates.select_BOARD_SCREEN.hashValue {
             boardSelected = selection
         } else {
             tilesSelected = selection
@@ -254,42 +254,42 @@ class ShiftSelection: NSObject {
         if selection <= -1 {
             selection = items!.count - 1
             
-            selector_on!.position = CGPointMake(scene!.size.width/2 + (initPosSelector + (spacesBetweenSelectors * CGFloat.init(selection))), items![0]!.position.y - items![0]!.size.height/2 - 30)
+            selector_on!.position = CGPoint(x: scene!.size.width/2 + (initPosSelector + (spacesBetweenSelectors * CGFloat.init(selection))), y: items![0]!.position.y - items![0]!.size.height/2 - 30)
             
             for i in 0..<items!.count {
                 if i == 0 {
-                    items![i]!.runAction(SKAction.sequence([
-                        SKAction.moveToX(items![i]!.position.x + CGRectGetMaxX(scene!.frame), duration: 0.3),
-                        SKAction.moveToX(CGRectGetMaxX(scene!.frame) * -CGFloat.init((items!.count - 2 - i)) - CGRectGetMidX(scene!.frame), duration: 0)]))
+                    items![i]!.run(SKAction.sequence([
+                        SKAction.moveTo(x: items![i]!.position.x + scene!.frame.maxX, duration: 0.3),
+                        SKAction.moveTo(x: scene!.frame.maxX * -CGFloat.init((items!.count - 2 - i)) - scene!.frame.midX, duration: 0)]))
                 } else if i == items!.count - 1 {
-                    items![i]!.runAction(SKAction.sequence([
-                        SKAction.moveToX(-CGRectGetMidX(scene!.frame), duration: 0),
-                        SKAction.moveToX(CGRectGetMidX(scene!.frame), duration: 0.3),
-                        SKAction.runBlock({
+                    items![i]!.run(SKAction.sequence([
+                        SKAction.moveTo(x: -scene!.frame.midX, duration: 0),
+                        SKAction.moveTo(x: scene!.frame.midX, duration: 0.3),
+                        SKAction.run({
                             self.blockArrows = false
                         })]))
                 } else {
-                    items![i]!.runAction(SKAction.moveToX(CGRectGetMaxX(scene!.frame) * -CGFloat.init((items!.count - 2 - i)) - CGRectGetMidX(scene!.frame), duration:0))
+                    items![i]!.run(SKAction.moveTo(x: scene!.frame.maxX * -CGFloat.init((items!.count - 2 - i)) - scene!.frame.midX, duration:0))
                 }
             }
             
         } else {
-            selector_on!.position = CGPointMake(selector_on!.position.x - spacesBetweenSelectors, items![0]!.position.y - items![0]!.size.height/2 - 30)
+            selector_on!.position = CGPoint(x: selector_on!.position.x - spacesBetweenSelectors, y: items![0]!.position.y - items![0]!.size.height/2 - 30)
             
             for i in 0..<items!.count {
                 if i == items!.count - 1 {
-                    items![i]!.runAction(SKAction.sequence([
-                        SKAction.moveToX(items![i]!.position.x + CGRectGetMaxX(scene!.frame), duration:0.3),
-                        SKAction.runBlock({
+                    items![i]!.run(SKAction.sequence([
+                        SKAction.moveTo(x: items![i]!.position.x + scene!.frame.maxX, duration:0.3),
+                        SKAction.run({
                             self.blockArrows = false
                         })]))
                 } else {
-                    items![i]!.runAction(SKAction.moveToX(items![i]!.position.x + CGRectGetMaxX(scene!.frame), duration:0.3))
+                    items![i]!.run(SKAction.moveTo(x: items![i]!.position.x + scene!.frame.maxX, duration:0.3))
                 }
             }
         }
         
-        if currentState == gameStates.SELECT_BOARD_SCREEN.hashValue {
+        if currentState == gameStates.select_BOARD_SCREEN.hashValue {
             boardSelected = selection
         } else {
             tilesSelected = selection

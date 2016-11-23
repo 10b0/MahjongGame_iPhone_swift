@@ -35,13 +35,13 @@ class Help {
     init(scene: SKNode) {
         backGroundHelp = SKSpriteNode(color: orangeColorBackground, size: scene.frame.size)
         backGroundHelp!.zPosition = 600
-        backGroundHelp!.position = CGPointMake(scene.frame.size.width/2, scene.frame.size.height/2)
+        backGroundHelp!.position = CGPoint(x: scene.frame.size.width/2, y: scene.frame.size.height/2)
         
         pageNum = 0
     }
     //////HELP SCREEN///////
     
-    func drawHelpScreen(tilesSelected: Int, scene: SKNode) {
+    func drawHelpScreen(_ tilesSelected: Int, scene: SKNode) {
         
         
         scene.addChild(backGroundHelp!)
@@ -52,7 +52,7 @@ class Help {
 
             if pageNum <= 0 {
                 // Animation
-                if tilesSelected == tilesSet.ORIGINAL.hashValue {
+                if tilesSelected == tilesSet.original.hashValue {
                     ficha1 = SKSpriteNode(imageNamed: "ficha0")
                     ficha2 = SKSpriteNode(imageNamed: "ficha0")
                 } else {
@@ -63,12 +63,12 @@ class Help {
                 handPress1 = SKSpriteNode(imageNamed: "hand_press")
                 handLike = SKSpriteNode(imageNamed: "hand_like")
                 
-                ficha1!.position = CGPointMake(scene.frame.size.width/2 - ficha1!.size.width/2, scene.frame.size.height/6 * 2);
-                ficha2!.position = CGPointMake(scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 9, scene.frame.size.height/6 * 2);
+                ficha1!.position = CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width/2, y: scene.frame.size.height/6 * 2);
+                ficha2!.position = CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 9, y: scene.frame.size.height/6 * 2);
                 
-                hand!.position = CGPointMake(scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 9 + ficha1!.size.width/2 + 60, scene.frame.size.height/6 * 2 - ficha1!.size.height/4);
-                handPress1!.position = CGPointMake(scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 9 + ficha1!.size.width/2, scene.frame.size.height/6 * 2 - ficha1!.size.height/4);
-                handLike!.position = CGPointMake(scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width/2, scene.frame.size.height/6 * 2 - ficha1!.size.height/4);
+                hand!.position = CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 9 + ficha1!.size.width/2 + 60, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/4);
+                handPress1!.position = CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 9 + ficha1!.size.width/2, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/4);
+                handLike!.position = CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width/2, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/4);
                 
                 ficha1!.zPosition = 601
                 ficha2!.zPosition = ficha1!.zPosition + 1
@@ -79,15 +79,15 @@ class Help {
                 colorRandom = Int.init(arc4random() % 4)
                 switch colorRandom {
                 case 0:
-                    color = SKColor.redColor()
+                    color = SKColor.red
                 case 1:
-                    color = SKColor.blueColor()
+                    color = SKColor.blue
                 case 2:
-                    color = SKColor.yellowColor()
+                    color = SKColor.yellow
                 case 3:
-                    color = SKColor.purpleColor()
+                    color = SKColor.purple
                 default:
-                    color = SKColor.yellowColor()
+                    color = SKColor.yellow
                 }
                 
                 ficha1!.color = color!
@@ -95,15 +95,15 @@ class Help {
                 ficha1!.colorBlendFactor = 0.35
                 ficha2!.colorBlendFactor = 0.35
                 
-                let handInitPos = SKAction.moveTo(CGPointMake(scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 16 + ficha1!.size.width/2 + 60, scene.frame.size.height/6 * 2 - ficha1!.size.height/4), duration: 0)
-                let moveHandPos2 = SKAction.moveTo(CGPointMake(scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 16 + ficha1!.size.width/2, scene.frame.size.height/6 * 2 - ficha1!.size.height/4), duration: 0.3)
-                let moveHandPos3 = SKAction.moveTo(CGPointMake(scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width/2, scene.frame.size.height/6 * 2 - ficha1!.size.height/4), duration:0.3)
-                let waith1 = SKAction.waitForDuration(1)
-                let waith0_3 = SKAction.waitForDuration(0.3)
-                let changeColor = SKAction.colorizeWithColor(UIColor.greenColor(), colorBlendFactor: 0.7, duration: 0)
-                let restoreColor = SKAction.colorizeWithColor(color!, colorBlendFactor: 0.35, duration: 0)
-                let deleteFicha = SKAction.scaleTo(0, duration: 0.3)
-                let restoreFicha = SKAction.scaleTo(1, duration: 0)
+                let handInitPos = SKAction.move(to: CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 16 + ficha1!.size.width/2 + 60, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/4), duration: 0)
+                let moveHandPos2 = SKAction.move(to: CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width - 16 + ficha1!.size.width/2, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/4), duration: 0.3)
+                let moveHandPos3 = SKAction.move(to: CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width/2 + ficha1!.size.width/2, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/4), duration:0.3)
+                let waith1 = SKAction.wait(forDuration: 1)
+                let waith0_3 = SKAction.wait(forDuration: 0.3)
+                let changeColor = SKAction.colorize(with: UIColor.green, colorBlendFactor: 0.7, duration: 0)
+                let restoreColor = SKAction.colorize(with: color!, colorBlendFactor: 0.35, duration: 0)
+                let deleteFicha = SKAction.scale(to: 0, duration: 0.3)
+                let restoreFicha = SKAction.scale(to: 1, duration: 0)
                 let hide = SKAction.hide()
                 let unhide = SKAction.unhide()
                 
@@ -115,11 +115,11 @@ class Help {
                 let aHandPress1 = SKAction.sequence([hide, waith0_3, unhide, waith0_3, hide, waith1, moveHandPos3, unhide, waith0_3, hide, moveHandPos2, waith1])
                 let aHandLike1 = SKAction.sequence([hide, waith0_3, waith0_3, waith1, waith0_3, waith0_3, waith0_3, unhide, waith1])
                 
-                ficha1!.runAction(SKAction.repeatActionForever(aFicha1))
-                ficha2!.runAction(SKAction.repeatActionForever(aFicha2))
-                hand!.runAction(SKAction.repeatActionForever(aHand1))
-                handPress1!.runAction(SKAction.repeatActionForever(aHandPress1))
-                handLike!.runAction(SKAction.repeatActionForever(aHandLike1))
+                ficha1!.run(SKAction.repeatForever(aFicha1))
+                ficha2!.run(SKAction.repeatForever(aFicha2))
+                hand!.run(SKAction.repeatForever(aHand1))
+                handPress1!.run(SKAction.repeatForever(aHandPress1))
+                handLike!.run(SKAction.repeatForever(aHandLike1))
                 
                 previousButton = TextAndButtons.createdArrowButton(false)
                 nextButton = TextAndButtons.createdArrowButton(true)
@@ -129,17 +129,17 @@ class Help {
             
         }
         
-        TextAndButtons.drawText("Help", size:40, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 5), scene:scene)
+        TextAndButtons.drawText("Help", size:40, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 5), scene:scene)
             
-        TextAndButtons.drawButton(previousButton!, text:"previous", position:CGPointMake(scene.frame.size.width/2 - previousButton!.size.width/2 - 60, previousButton!.size.height + 15), scene:scene)
-        TextAndButtons.drawButton(nextButton!, text:"next", position:CGPointMake(scene.frame.size.width/2 + nextButton!.size.width/2 + 60, nextButton!.size.height + 15), scene:scene)
+        TextAndButtons.drawButton(previousButton!, text:"previous", position:CGPoint(x: scene.frame.size.width/2 - previousButton!.size.width/2 - 60, y: previousButton!.size.height + 15), scene:scene)
+        TextAndButtons.drawButton(nextButton!, text:"next", position:CGPoint(x: scene.frame.size.width/2 + nextButton!.size.width/2 + 60, y: nextButton!.size.height + 15), scene:scene)
         
         if pageNum <= 0
         {
-            TextAndButtons.drawText("Remove all the tiles to win!!", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 4.5), scene:scene)
-            TextAndButtons.drawText("How you can remove the tiles?", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 4), scene:scene)
-            TextAndButtons.drawText("You can remove pair of tiles ", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 3.5), scene:scene)
-            TextAndButtons.drawText("of the same figure by selecting them.", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 3), scene:scene)
+            TextAndButtons.drawText("Remove all the tiles to win!!", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 4.5), scene:scene)
+            TextAndButtons.drawText("How you can remove the tiles?", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 4), scene:scene)
+            TextAndButtons.drawText("You can remove pair of tiles ", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 3.5), scene:scene)
+            TextAndButtons.drawText("of the same figure by selecting them.", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 3), scene:scene)
             
             scene.addChild(ficha1!)
             scene.addChild(ficha2!)
@@ -149,9 +149,9 @@ class Help {
             
         } else if pageNum == 1 {
             
-            TextAndButtons.drawText("But you only can remove them if the tiles", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 4.5), scene:scene)
-            TextAndButtons.drawText("have one of their side left or right free of other", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 4), scene:scene)
-            TextAndButtons.drawText("tile or do not have other tile above of them.", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 3.5), scene:scene)
+            TextAndButtons.drawText("But you only can remove them if the tiles", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 4.5), scene:scene)
+            TextAndButtons.drawText("have one of their side left or right free of other", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 4), scene:scene)
+            TextAndButtons.drawText("tile or do not have other tile above of them.", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 3.5), scene:scene)
             
             let ficha1: SKSpriteNode?
             let ficha2: SKSpriteNode?
@@ -169,7 +169,7 @@ class Help {
             let ficha12: SKSpriteNode?
             
             
-            if tilesSelected == tilesSet.ORIGINAL.hashValue {
+            if tilesSelected == tilesSet.original.hashValue {
                 ficha1 = SKSpriteNode(imageNamed: "ficha0")
                 ficha2 = SKSpriteNode(imageNamed: "ficha8")
                 ficha3 = SKSpriteNode(imageNamed: "ficha11")
@@ -232,26 +232,26 @@ class Help {
             
             switch colorRandom {
             case 0:
-                ficha12!.color = SKColor.blueColor()
+                ficha12!.color = SKColor.blue
             case 1:
-                ficha12!.color = SKColor.yellowColor()
+                ficha12!.color = SKColor.yellow
             case 2:
-                ficha12!.color = SKColor.purpleColor()
+                ficha12!.color = SKColor.purple
             case 3:
-                ficha12!.color = SKColor.redColor()
+                ficha12!.color = SKColor.red
             default:
-                ficha1!.color = SKColor.yellowColor()
-                ficha2!.color = SKColor.yellowColor()
-                ficha3!.color = SKColor.yellowColor()
-                ficha4!.color = SKColor.yellowColor()
-                ficha5!.color = SKColor.yellowColor()
-                ficha6!.color = SKColor.yellowColor()
-                ficha7!.color = SKColor.yellowColor()
-                ficha8!.color = SKColor.yellowColor()
-                ficha9!.color = SKColor.yellowColor()
-                ficha10!.color = SKColor.yellowColor()
-                ficha11!.color = SKColor.yellowColor()
-                ficha12!.color = SKColor.yellowColor()
+                ficha1!.color = SKColor.yellow
+                ficha2!.color = SKColor.yellow
+                ficha3!.color = SKColor.yellow
+                ficha4!.color = SKColor.yellow
+                ficha5!.color = SKColor.yellow
+                ficha6!.color = SKColor.yellow
+                ficha7!.color = SKColor.yellow
+                ficha8!.color = SKColor.yellow
+                ficha9!.color = SKColor.yellow
+                ficha10!.color = SKColor.yellow
+                ficha11!.color = SKColor.yellow
+                ficha12!.color = SKColor.yellow
             }
             
             ficha1!.colorBlendFactor = 0.35;
@@ -268,12 +268,12 @@ class Help {
             ficha12!.colorBlendFactor = 0.35;
             
             
-            ficha1!.position = CGPointMake(scene.frame.size.width/4 - ficha1!.size.width, scene.frame.size.height/6 * 2)
-            ficha2!.position = CGPointMake(scene.frame.size.width/4 - 9, scene.frame.size.height/6 * 2)
-            ficha3!.position = CGPointMake(scene.frame.size.width/4 - 9 + ficha1!.size.width - 9, scene.frame.size.height/6 * 2)
-            yes1.position = CGPointMake(scene.frame.size.width/4 - ficha1!.size.width, scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
-            no1.position = CGPointMake(scene.frame.size.width/4 - 9, scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
-            yes2.position = CGPointMake(scene.frame.size.width/4 - 9 + ficha1!.size.width - 9, scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
+            ficha1!.position = CGPoint(x: scene.frame.size.width/4 - ficha1!.size.width, y: scene.frame.size.height/6 * 2)
+            ficha2!.position = CGPoint(x: scene.frame.size.width/4 - 9, y: scene.frame.size.height/6 * 2)
+            ficha3!.position = CGPoint(x: scene.frame.size.width/4 - 9 + ficha1!.size.width - 9, y: scene.frame.size.height/6 * 2)
+            yes1.position = CGPoint(x: scene.frame.size.width/4 - ficha1!.size.width, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
+            no1.position = CGPoint(x: scene.frame.size.width/4 - 9, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
+            yes2.position = CGPoint(x: scene.frame.size.width/4 - 9 + ficha1!.size.width - 9, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
             
             ficha1!.zPosition = 601
             ficha2!.zPosition = ficha1!.zPosition + 1
@@ -290,15 +290,15 @@ class Help {
             scene.addChild(yes2)
             
             
-            ficha4!.position = CGPointMake(scene.frame.size.width/2 - ficha1!.size.width, scene.frame.size.height/6 * 2)
-            ficha5!.position = CGPointMake(scene.frame.size.width/2 - 9, scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5)
-            ficha6!.position = CGPointMake(scene.frame.size.width/2 - 9, scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 4.5)
-            ficha7!.position = CGPointMake(scene.frame.size.width/2 - 9 + ficha1!.size.width - 9, scene.frame.size.height/6 * 2)
+            ficha4!.position = CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width, y: scene.frame.size.height/6 * 2)
+            ficha5!.position = CGPoint(x: scene.frame.size.width/2 - 9, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5)
+            ficha6!.position = CGPoint(x: scene.frame.size.width/2 - 9, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 4.5)
+            ficha7!.position = CGPoint(x: scene.frame.size.width/2 - 9 + ficha1!.size.width - 9, y: scene.frame.size.height/6 * 2)
             
-            yes3.position = CGPointMake(scene.frame.size.width/2 - ficha1!.size.width, scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
-            no2.position = CGPointMake(scene.frame.size.width/2 - 9, scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5 + ficha1!.size.height/3)
-            no3.position = CGPointMake(scene.frame.size.width/2 - 9, scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 9 - ficha1!.size.height/3)
-            yes4.position = CGPointMake(scene.frame.size.width/2 - 9 + ficha1!.size.width - 9, scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
+            yes3.position = CGPoint(x: scene.frame.size.width/2 - ficha1!.size.width, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
+            no2.position = CGPoint(x: scene.frame.size.width/2 - 9, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5 + ficha1!.size.height/3)
+            no3.position = CGPoint(x: scene.frame.size.width/2 - 9, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 9 - ficha1!.size.height/3)
+            yes4.position = CGPoint(x: scene.frame.size.width/2 - 9 + ficha1!.size.width - 9, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/3)
             
             ficha4!.zPosition = 601
             ficha5!.zPosition = ficha4!.zPosition + 1
@@ -319,16 +319,16 @@ class Help {
             scene.addChild(yes4)
             
             
-            ficha8!.position = CGPointMake(scene.frame.size.width/1.35 - ficha1!.size.width/2 + 4.5, scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5)
-            ficha9!.position = CGPointMake(scene.frame.size.width/1.35 - ficha1!.size.width/2 + 4.5, scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 4.5)
-            ficha10!.position = CGPointMake(scene.frame.size.width/1.35 + ficha1!.size.width/2 - 4.5, scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5)
-            ficha11!.position = CGPointMake(scene.frame.size.width/1.35 + ficha1!.size.width/2 - 4.5, scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 4.5)
-            ficha12!.position = CGPointMake(scene.frame.size.width/1.35 - 4.5, scene.frame.size.height/6 * 2 + 4.5)
-            no4.position = CGPointMake(scene.frame.size.width/1.35 - ficha1!.size.width/2 + 4.5, scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5 + ficha1!.size.height/3)
-            no5.position = CGPointMake(scene.frame.size.width/1.35 - ficha1!.size.width/2 + 4.5, scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 9 - ficha1!.size.height/3)
-            no6.position = CGPointMake(scene.frame.size.width/1.35 + ficha1!.size.width/2 - 4.5, scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5 + ficha1!.size.height/3)
-            no7.position = CGPointMake(scene.frame.size.width/1.35 + ficha1!.size.width/2 - 4.5, scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 9 - ficha1!.size.height/3)
-            yes5.position = CGPointMake(scene.frame.size.width/1.35 - 4.5, scene.frame.size.height/6 * 2 + 4.5 + ficha1!.size.height/3)
+            ficha8!.position = CGPoint(x: scene.frame.size.width/1.35 - ficha1!.size.width/2 + 4.5, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5)
+            ficha9!.position = CGPoint(x: scene.frame.size.width/1.35 - ficha1!.size.width/2 + 4.5, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 4.5)
+            ficha10!.position = CGPoint(x: scene.frame.size.width/1.35 + ficha1!.size.width/2 - 4.5, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5)
+            ficha11!.position = CGPoint(x: scene.frame.size.width/1.35 + ficha1!.size.width/2 - 4.5, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 4.5)
+            ficha12!.position = CGPoint(x: scene.frame.size.width/1.35 - 4.5, y: scene.frame.size.height/6 * 2 + 4.5)
+            no4.position = CGPoint(x: scene.frame.size.width/1.35 - ficha1!.size.width/2 + 4.5, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5 + ficha1!.size.height/3)
+            no5.position = CGPoint(x: scene.frame.size.width/1.35 - ficha1!.size.width/2 + 4.5, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 9 - ficha1!.size.height/3)
+            no6.position = CGPoint(x: scene.frame.size.width/1.35 + ficha1!.size.width/2 - 4.5, y: scene.frame.size.height/6 * 2 + ficha1!.size.height/2 - 4.5 + ficha1!.size.height/3)
+            no7.position = CGPoint(x: scene.frame.size.width/1.35 + ficha1!.size.width/2 - 4.5, y: scene.frame.size.height/6 * 2 - ficha1!.size.height/2 + 9 - ficha1!.size.height/3)
+            yes5.position = CGPoint(x: scene.frame.size.width/1.35 - 4.5, y: scene.frame.size.height/6 * 2 + 4.5 + ficha1!.size.height/3)
             
             ficha8!.zPosition = 601
             ficha9!.zPosition = ficha8!.zPosition + 1
@@ -354,27 +354,27 @@ class Help {
             
         } else if pageNum == 2 {
             
-            TextAndButtons.drawButton(undoButton!, text:"Undo", position:CGPointMake(scene.frame.size.width/2, scene.frame.size.height/6 * 4), scene:scene)
+            TextAndButtons.drawButton(undoButton!, text:"Undo", position:CGPoint(x: scene.frame.size.width/2, y: scene.frame.size.height/6 * 4), scene:scene)
             
-            TextAndButtons.drawText("Remove some tiles you don’t want to,", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 3), scene:scene)
-            TextAndButtons.drawText("no problem, press the undo button to", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 2.5), scene:scene)
-            TextAndButtons.drawText("undo your last movement.", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 2), scene:scene)
+            TextAndButtons.drawText("Remove some tiles you don’t want to,", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 3), scene:scene)
+            TextAndButtons.drawText("no problem, press the undo button to", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 2.5), scene:scene)
+            TextAndButtons.drawText("undo your last movement.", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 2), scene:scene)
             
         } else if pageNum >= 3 {
             
-            TextAndButtons.drawButton(hintButton!, text:"Hint", position:CGPointMake(scene.frame.size.width/2, scene.frame.size.height/6 * 4), scene:scene)
+            TextAndButtons.drawButton(hintButton!, text:"Hint", position:CGPoint(x: scene.frame.size.width/2, y: scene.frame.size.height/6 * 4), scene:scene)
             
-            TextAndButtons.drawText("If you get stock and want help,", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 3), scene:scene)
-            TextAndButtons.drawText("you always can press the hint button", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 2.5), scene:scene)
-            TextAndButtons.drawText("and show you what tiles can remove.", size:30, position:CGPointMake(CGRectGetMidX(scene.frame), scene.frame.size.height/6 * 2), scene:scene)
+            TextAndButtons.drawText("If you get stock and want help,", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 3), scene:scene)
+            TextAndButtons.drawText("you always can press the hint button", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 2.5), scene:scene)
+            TextAndButtons.drawText("and show you what tiles can remove.", size:30, position:CGPoint(x: scene.frame.midX, y: scene.frame.size.height/6 * 2), scene:scene)
         }
         
-        TextAndButtons.drawText("Page", size:30, position:CGPointMake(scene.frame.size.width/2, previousButton!.size.height + 30), scene:scene)
-        TextAndButtons.drawText("\(pageNum + 1) / \(HELP_PAGES_MAX + 1)", size:30, position:CGPointMake(scene.frame.size.width/2, previousButton!.size.height), scene:scene)
+        TextAndButtons.drawText("Page", size:30, position:CGPoint(x: scene.frame.size.width/2, y: previousButton!.size.height + 30), scene:scene)
+        TextAndButtons.drawText("\(pageNum + 1) / \(HELP_PAGES_MAX + 1)", size:30, position:CGPoint(x: scene.frame.size.width/2, y: previousButton!.size.height), scene:scene)
     }
     
     
-    func updateHelpScreen(point: CGPoint, ended: Bool) {
+    func updateHelpScreen(_ point: CGPoint, ended: Bool) {
         updateBackButton(point, ended: ended)
         
         

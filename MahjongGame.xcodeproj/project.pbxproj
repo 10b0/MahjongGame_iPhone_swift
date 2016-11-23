@@ -186,9 +186,11 @@
 					FFA40BA41CA9D3B70006CE56 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = YR76H6X5D2;
+						LastSwiftMigration = 0810;
 					};
 					FFA40BBC1CA9D3B70006CE56 = {
 						CreatedOnToolsVersion = 7.3;
+						LastSwiftMigration = 0810;
 						TestTargetID = FFA40BA41CA9D3B70006CE56;
 					};
 				};
@@ -389,6 +391,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiftgame.MahjongGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -404,6 +407,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiftgame.MahjongGame;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -417,6 +421,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiftgame.MahjongGameTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MahjongGame.app/MahjongGame";
 			};
 			name = Debug;
@@ -429,6 +434,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.swiftgame.MahjongGameTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MahjongGame.app/MahjongGame";
 			};
 			name = Release;

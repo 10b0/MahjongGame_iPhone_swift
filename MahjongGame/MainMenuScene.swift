@@ -64,12 +64,12 @@ class MainMenuScene: SKScene {
         helpScreen = Help(scene: self)
         selectorScreen = ShiftSelection(newScene: self)
         
-        changeState(gameStates.MAIN_MENU_SCREEN.hashValue)  //Root state
+        changeState(gameStates.main_MENU_SCREEN.hashValue)  //Root state
         
         
         backGroundMenu = SKSpriteNode(color: orangeColorBackground, size: frame.size)
         backGroundMenu!.zPosition = -20
-        backGroundMenu!.position = CGPointMake(frame.size.width/2, frame.size.height/2)
+        backGroundMenu!.position = CGPoint(x: frame.size.width/2, y: frame.size.height/2)
         
         
         initState = true
@@ -80,7 +80,7 @@ class MainMenuScene: SKScene {
         
         let backgroundMenuImg = SKSpriteNode(imageNamed: "DragonMenu")
         backgroundMenuImg.zPosition = -10
-        backgroundMenuImg.position = CGPointMake(frame.width/2, frame.height/2)
+        backgroundMenuImg.position = CGPoint(x: frame.width/2, y: frame.height/2)
         
         // menu animation
         let menuAtlas = SKTextureAtlas(named: "DragonMenuAnim")
@@ -93,8 +93,8 @@ class MainMenuScene: SKScene {
         menuArray.append(SKTexture(imageNamed: "DragonMenu1"))
         
         menuInitFlame = SKSpriteNode(texture: menuArray[0])
-        menuInitFlame!.position = CGPointMake(CGRectGetMidX(frame), CGRectGetMidY(frame))
-        menuInitFlame!.runAction(SKAction.repeatActionForever(SKAction.sequence([SKAction.animateWithTextures(menuArray, timePerFrame: 0.15), SKAction.waitForDuration(6
+        menuInitFlame!.position = CGPoint(x: frame.midX, y: frame.midY)
+        menuInitFlame!.run(SKAction.repeatForever(SKAction.sequence([SKAction.animate(with: menuArray, timePerFrame: 0.15), SKAction.wait(forDuration: 6
             )])))
         
         print("main menu init state:\(currentState)   init:\(initState)")
@@ -107,49 +107,49 @@ class MainMenuScene: SKScene {
     }
     
     
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         /* Called when a touch begins */
         
         for touch in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             feedbackButtons(location, ended: false)
         }
     }
     
     
-    override func touchesMoved(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             feedbackButtons(location, ended: false)
         }
         
     }
     
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
         for touch in touches {
-            let location = touch.locationInNode(self)
+            let location = touch.location(in: self)
             feedbackButtons(location, ended: true)
         }
     }
     
-    func feedbackButtons(location: CGPoint, ended: Bool) {
+    func feedbackButtons(_ location: CGPoint, ended: Bool) {
         
         switch currentState {
-        case gameStates.MAIN_MENU_SCREEN.hashValue:
+        case gameStates.main_MENU_SCREEN.hashValue:
             updateMainMenuScreen(location, ended: ended)
-        case gameStates.SELECT_BOARD_SCREEN.hashValue:
+        case gameStates.select_BOARD_SCREEN.hashValue:
             
             if selectorScreen!.updateSelectBoardScreen(location, ended: ended) {
-                changeState(gameStates.SELECT_TOKEN_SCREEN.hashValue)
+                changeState(gameStates.select_TOKEN_SCREEN.hashValue)
             }
             
-        case gameStates.SELECT_TOKEN_SCREEN.hashValue:
+        case gameStates.select_TOKEN_SCREEN.hashValue:
             
             if selectorScreen!.updateSelectBoardScreen(location, ended: ended) {
                 
                 blockUpdate = true
                 
-                let transition = SKTransition.doorsOpenHorizontalWithDuration(1.5)
+                let transition = SKTransition.doorsOpenHorizontal(withDuration: 1.5)
                 //check music
                 let gameplayScene = GameplayScene(size: size, music: soundManager!.activeSounds, mark: enebleMark)
                 view?.presentScene(gameplayScene, transition: transition)
@@ -157,11 +157,11 @@ class MainMenuScene: SKScene {
                 soundManager!.stopMainMusic()
                 
             }
-        case gameStates.OPTIONS_SCREEN.hashValue:
+        case gameStates.options_SCREEN.hashValue:
             updateOptionsScreen(location, ended: ended)
-        case gameStates.HELP_SCREEN.hashValue:
+        case gameStates.help_SCREEN.hashValue:
             helpScreen!.updateHelpScreen(location, ended: ended)
-        case gameStates.ABOUT_SCREEN.hashValue:
+        case gameStates.about_SCREEN.hashValue:
             updateAboutScreen(location, ended: ended)
         default:
             break
@@ -175,15 +175,15 @@ class MainMenuScene: SKScene {
         removeAllChildren()
         
         switch currentState {
-        case gameStates.MAIN_MENU_SCREEN.hashValue:
+        case gameStates.main_MENU_SCREEN.hashValue:
             drawMainMenuScreen()
-        case gameStates.SELECT_BOARD_SCREEN.hashValue, gameStates.SELECT_TOKEN_SCREEN.hashValue:
+        case gameStates.select_BOARD_SCREEN.hashValue, gameStates.select_TOKEN_SCREEN.hashValue:
             selectorScreen!.drawSelectScreen()
-        case gameStates.OPTIONS_SCREEN.hashValue:
+        case gameStates.options_SCREEN.hashValue:
             drawOptionsScreen()
-        case gameStates.HELP_SCREEN.hashValue:
+        case gameStates.help_SCREEN.hashValue:
             helpScreen!.drawHelpScreen(tilesSelected, scene: self)
-        case gameStates.ABOUT_SCREEN.hashValue:
+        case gameStates.about_SCREEN.hashValue:
             drawAboutScreen()
         default:
             break
@@ -205,42 +205,42 @@ class MainMenuScene: SKScene {
         addChild(menuInitFlame!)
         
         
-        TextAndButtons.drawText("MENU", size: 40, position: CGPointMake(CGRectGetMidX(frame) + frame.size.width/8, frame.size.height/4 * 2.5), scene: self)
+        TextAndButtons.drawText("MENU", size: 40, position: CGPoint(x: frame.midX + frame.size.width/8, y: frame.size.height/4 * 2.5), scene: self)
         
-        TextAndButtons.drawButton(gameButton!, text: "Start Game", position: CGPointMake(CGRectGetMidX(frame) + frame.size.width/8, frame.size.height/4 * 2.125), scene: self)
-        TextAndButtons.drawButton(optionsButton!, text: "Options", position: CGPointMake(CGRectGetMidX(frame) + frame.size.width/8, frame.size.height/4 * 1.75), scene: self)
-        TextAndButtons.drawButton(helpButton!, text: "Help", position: CGPointMake(CGRectGetMidX(frame) + frame.size.width/8, frame.size.height/4 * 1.375), scene: self)
-        TextAndButtons.drawButton(aboutButton!, text: "About", position: CGPointMake(CGRectGetMidX(frame) + frame.size.width/8, frame.size.height/4), scene: self)
+        TextAndButtons.drawButton(gameButton!, text: "Start Game", position: CGPoint(x: frame.midX + frame.size.width/8, y: frame.size.height/4 * 2.125), scene: self)
+        TextAndButtons.drawButton(optionsButton!, text: "Options", position: CGPoint(x: frame.midX + frame.size.width/8, y: frame.size.height/4 * 1.75), scene: self)
+        TextAndButtons.drawButton(helpButton!, text: "Help", position: CGPoint(x: frame.midX + frame.size.width/8, y: frame.size.height/4 * 1.375), scene: self)
+        TextAndButtons.drawButton(aboutButton!, text: "About", position: CGPoint(x: frame.midX + frame.size.width/8, y: frame.size.height/4), scene: self)
         
         soundManager!.playMainMusic()
         
     }
     
     
-    func updateMainMenuScreen(point: CGPoint, ended: Bool) {
+    func updateMainMenuScreen(_ point: CGPoint, ended: Bool) {
 
         
         if TextAndButtons.checkTouch(point, button: gameButton!, ended: ended) {
             if ended {
-                changeState(gameStates.SELECT_BOARD_SCREEN.hashValue)
+                changeState(gameStates.select_BOARD_SCREEN.hashValue)
             }
         }
         
         if TextAndButtons.checkTouch(point, button: optionsButton!, ended: ended) {
             if ended {
-                changeState(gameStates.OPTIONS_SCREEN.hashValue)
+                changeState(gameStates.options_SCREEN.hashValue)
             }
         }
         
         if TextAndButtons.checkTouch(point, button: helpButton!, ended:  ended) {
             if ended {
-                changeState(gameStates.HELP_SCREEN.hashValue)
+                changeState(gameStates.help_SCREEN.hashValue)
             }
         }
         
         if TextAndButtons.checkTouch(point, button: aboutButton!, ended: ended) {
             if ended {
-                changeState(gameStates.ABOUT_SCREEN.hashValue)
+                changeState(gameStates.about_SCREEN.hashValue)
             }
         }
     }
@@ -260,7 +260,7 @@ class MainMenuScene: SKScene {
         
         
         initState = false
-        if tilesSelected == tilesSet.ORIGINAL.hashValue {
+        if tilesSelected == tilesSet.original.hashValue {
             ficha01 = SKSpriteNode(imageNamed: "ficha0")
             ficha02 = SKSpriteNode(imageNamed: "ficha8")
             ficha03 = SKSpriteNode(imageNamed: "ficha11")
@@ -270,21 +270,21 @@ class MainMenuScene: SKScene {
             ficha03 = SKSpriteNode(imageNamed: "fichaM11")
         }
         
-        ficha01!.position = CGPointMake(frame.size.width/1.5 - ficha01!.size.width, ((CGRectGetMaxY(frame) / 6) * 3) + 15)
-        ficha02!.position = CGPointMake(frame.size.width/1.5 - 9, ((CGRectGetMaxY(frame) / 6) * 3) + 15)
-        ficha03!.position = CGPointMake(frame.size.width/1.5 - 9 + ficha01!.size.width - 9, ((CGRectGetMaxY(frame) / 6) * 3) + 15)
+        ficha01!.position = CGPoint(x: frame.size.width/1.5 - ficha01!.size.width, y: ((frame.maxY / 6) * 3) + 15)
+        ficha02!.position = CGPoint(x: frame.size.width/1.5 - 9, y: ((frame.maxY / 6) * 3) + 15)
+        ficha03!.position = CGPoint(x: frame.size.width/1.5 - 9 + ficha01!.size.width - 9, y: ((frame.maxY / 6) * 3) + 15)
         
         switch arc4random() % 4 {
         case 0:
-            color = SKColor.redColor()
+            color = SKColor.red
         case 1:
-            color = SKColor.blueColor()
+            color = SKColor.blue
         case 2:
-            color = SKColor.yellowColor()
+            color = SKColor.yellow
         case 3:
-            color = SKColor.purpleColor()
+            color = SKColor.purple
         default:
-            color = SKColor.yellowColor()
+            color = SKColor.yellow
         }
         
         ficha01!.color = color!
@@ -305,12 +305,12 @@ class MainMenuScene: SKScene {
             buttonMark = SKSpriteNode.init(imageNamed: "switch_off")
             ficha02!.colorBlendFactor = 0.35
         }
-        buttonMark!.position = CGPointMake(frame.size.width/1.5, ficha01!.position.y - ficha01!.size.height/2 - buttonMark!.size.height/2 - 10)
+        buttonMark!.position = CGPoint(x: frame.size.width/1.5, y: ficha01!.position.y - ficha01!.size.height/2 - buttonMark!.size.height/2 - 10)
         
         labelMark = SKLabelNode.init(fontNamed: "Superclarendon-Black")
         labelMark!.text = "Highlight:"
-        labelMark!.fontColor = UIColor.blackColor()
-        labelMark!.position = CGPointMake(frame.size.width/1.5, ficha01!.position.y + ficha01!.size.height/2 + labelMark!.frame.size.height/2)
+        labelMark!.fontColor = UIColor.black
+        labelMark!.position = CGPoint(x: frame.size.width/1.5, y: ficha01!.position.y + ficha01!.size.height/2 + labelMark!.frame.size.height/2)
         labelMark!.fontSize = 30
         
         if soundManager!.activeSounds {
@@ -318,16 +318,16 @@ class MainMenuScene: SKScene {
         } else {
             buttonMusic = SKSpriteNode.init(imageNamed: "music_off")
         }
-        buttonMusic!.position = CGPointMake(frame.size.width/3, ((CGRectGetMaxY(frame) / 6) * 3) - 15)
+        buttonMusic!.position = CGPoint(x: frame.size.width/3, y: ((frame.maxY / 6) * 3) - 15)
         
         labelMusic = SKLabelNode.init(fontNamed: "Superclarendon-Black")
         labelMusic!.text = "Sound:"
-        labelMusic!.fontColor = UIColor.blackColor()
-        labelMusic!.position = CGPointMake(frame.size.width/3, buttonMusic!.position.y + buttonMusic!.size.height/2 + labelMusic!.frame.size.height/2 + 15)
+        labelMusic!.fontColor = UIColor.black
+        labelMusic!.position = CGPoint(x: frame.size.width/3, y: buttonMusic!.position.y + buttonMusic!.size.height/2 + labelMusic!.frame.size.height/2 + 15)
         labelMusic!.fontSize = 30
         
         
-        TextAndButtons.drawText("Options", size: 40, position: CGPointMake(CGRectGetMidX(frame), frame.size.height/6 * 5), scene: self)
+        TextAndButtons.drawText("Options", size: 40, position: CGPoint(x: frame.midX, y: frame.size.height/6 * 5), scene: self)
         addChild(buttonMusic!)
         addChild(labelMusic!)
         addChild(ficha01!)
@@ -339,7 +339,7 @@ class MainMenuScene: SKScene {
     }
     
     
-    func updateOptionsScreen(point: CGPoint, ended: Bool) {
+    func updateOptionsScreen(_ point: CGPoint, ended: Bool) {
         updateBackButton(point, ended: ended)
         
         //Sound Button
@@ -357,7 +357,7 @@ class MainMenuScene: SKScene {
                         buttonMusic = SKSpriteNode(imageNamed: "music_on")
                         soundManager!.playMainMusic()
                     }
-                    buttonMusic!.position = CGPointMake(frame.size.width/3, ((CGRectGetMaxY(frame) / 6) * 3) - 15)
+                    buttonMusic!.position = CGPoint(x: frame.size.width/3, y: ((frame.maxY / 6) * 3) - 15)
                     addChild(buttonMusic!)
                 }
             }
@@ -379,7 +379,7 @@ class MainMenuScene: SKScene {
                         buttonMark = SKSpriteNode(imageNamed: "switch_on")
                         ficha02!.colorBlendFactor = 0.1
                     }
-                    buttonMark!.position = CGPointMake(frame.size.width/1.5, ficha01!.position.y - ficha01!.size.height/2 - buttonMark!.size.height/2 - 10)
+                    buttonMark!.position = CGPoint(x: frame.size.width/1.5, y: ficha01!.position.y - ficha01!.size.height/2 - buttonMark!.size.height/2 - 10)
                     addChild(buttonMark!)
                     
                 }
@@ -397,33 +397,33 @@ class MainMenuScene: SKScene {
         addChild(backGroundMenu!)
         
         //get the version
-        let version = NSBundle.mainBundle().objectForInfoDictionaryKey("CFBundleShortVersionString")
-        let build = NSBundle.mainBundle().objectForInfoDictionaryKey(kCFBundleVersionKey as String)
+        let version = Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString")
+        let build = Bundle.main.object(forInfoDictionaryKey: kCFBundleVersionKey as String)
         let displayVerison = "Version: \(version!)\(build!)"
         
         let aboutImg = SKSpriteNode.init(imageNamed: "AboutImage")
         aboutImg.zPosition = -20
-        aboutImg.position = CGPointMake(size.width/2, size.height/2)
+        aboutImg.position = CGPoint(x: size.width/2, y: size.height/2)
         addChild(aboutImg)
         
         drawBackButton(self)
         
         initState = false
             
-        TextAndButtons.drawText("About", size:40, position:CGPointMake(CGRectGetMidX(frame) + CGRectGetMidX(frame)/2.5, frame.size.height/6 * 5), scene:self)
-        TextAndButtons.drawText(displayVerison, size:20, position:CGPointMake(CGRectGetMidX(frame) + CGRectGetMidX(frame)/2.5, frame.size.height/6 * 4.7), scene:self)
-        TextAndButtons.drawText("2016", size:20, position:CGPointMake(CGRectGetMidX(frame) + CGRectGetMidX(frame)/2.5, frame.size.height/6 * 4.4), scene:self)
+        TextAndButtons.drawText("About", size:40, position:CGPoint(x: frame.midX + frame.midX/2.5, y: frame.size.height/6 * 5), scene:self)
+        TextAndButtons.drawText(displayVerison, size:20, position:CGPoint(x: frame.midX + frame.midX/2.5, y: frame.size.height/6 * 4.7), scene:self)
+        TextAndButtons.drawText("2016", size:20, position:CGPoint(x: frame.midX + frame.midX/2.5, y: frame.size.height/6 * 4.4), scene:self)
         
     }
     
     
-    func updateAboutScreen(point:CGPoint, ended:Bool) {
+    func updateAboutScreen(_ point:CGPoint, ended:Bool) {
         updateBackButton(point, ended:ended)
     }
     
     //////ABOUT SCREEN///////
     
-    override func update(currentTime: CFTimeInterval) {
+    override func update(_ currentTime: TimeInterval) {
         /* Called before each frame is rendered */
        // print("main menu update state:\(currentState)   init:\(initState)")
         if initState && !blockUpdate {

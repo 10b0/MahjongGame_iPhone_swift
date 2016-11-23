@@ -20,11 +20,11 @@ class Sound {
         if withMainTheme {
             
            // let path = NSBundle.mainBundle().URLForResource("main_theme", withExtension: "m4a")
-            let path = NSBundle.mainBundle().URLForResource("main_theme", withExtension: "m4a", subdirectory: "sounds")
+            let path = Bundle.main.url(forResource: "main_theme", withExtension: "m4a", subdirectory: "sounds")
             
             if let songPath = path {
                 do {
-                    mainThemeMusic = try AVAudioPlayer(contentsOfURL: songPath)
+                    mainThemeMusic = try AVAudioPlayer(contentsOf: songPath)
                     mainThemeMusic?.numberOfLoops = -1
                     mainThemeMusic?.volume = 0.03
                     self.activeSounds = activeSounds
@@ -41,10 +41,10 @@ class Sound {
     }
     
     
-    func playSound(name: String, scene: SKScene) {
+    func playSound(_ name: String, scene: SKScene) {
         
         if activeSounds {
-            scene.runAction(SKAction.playSoundFileNamed("sounds/" + name, waitForCompletion: false))
+            scene.run(SKAction.playSoundFileNamed("sounds/" + name, waitForCompletion: false))
         }
     }
     

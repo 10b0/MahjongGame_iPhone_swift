@@ -62,7 +62,7 @@ class Board {
         var numTokenRepeted = 0
         
         switch boardSelected {
-        case boardSet.TURTLE.hashValue:
+        case boardSet.turtle.hashValue:
             //init variables
             boardZ = 5
             boardX = 15
@@ -78,7 +78,7 @@ class Board {
            // maxToken = 2
            // numTokenRepeted = 72
             break
-        case boardSet.PYRAMID.hashValue:
+        case boardSet.pyramid.hashValue:
             //init variables
             boardZ = 4
             boardX = 8
@@ -95,7 +95,7 @@ class Board {
             
             break
             
-        case boardSet.SPIDER.hashValue:
+        case boardSet.spider.hashValue:
             //init variables
             boardZ = 4
             boardX = 15
@@ -105,7 +105,7 @@ class Board {
             numTokenRepeted = 4
             break
             
-        case boardSet.SPACE_INVADERS.hashValue:
+        case boardSet.space_INVADERS.hashValue:
             //init variables
             boardZ = 4
             boardX = 11
@@ -115,7 +115,7 @@ class Board {
             numTokenRepeted = 4
             break
             
-        case boardSet.MS_PACMAN.hashValue:
+        case boardSet.ms_PACMAN.hashValue:
             //init variables
             boardZ = 4
             boardX = 14
@@ -125,7 +125,7 @@ class Board {
             numTokenRepeted = 4
             break
             
-        case boardSet.MARIO_BROS.hashValue:
+        case boardSet.mario_BROS.hashValue:
             //init variables
             boardZ = 4
             boardX = 11
@@ -135,7 +135,7 @@ class Board {
             numTokenRepeted = 4
             break
             
-        case boardSet.TETRIS.hashValue:
+        case boardSet.tetris.hashValue:
             //init variables
             boardZ = 5
             boardX = 10
@@ -174,7 +174,7 @@ class Board {
     }
     
     
-    func createdFicha(posZ: Int, posX: Int, posY: Int) -> Ficha {
+    func createdFicha(_ posZ: Int, posX: Int, posY: Int) -> Ficha {
         
         var index = posX * (boardY - 1) + (posX + posY) + (((((boardX - 1) * (boardY - 1)) + ((boardX - 1) + (boardY - 1))) + 1) * posZ)
         print("index: \(index)")
@@ -185,7 +185,7 @@ class Board {
             index = resultArray.count
         }
         
-        let newFicha = Ficha(number: resultArray[index]!, position: CGPointMake(CGFloat.init(posX), CGFloat.init(posY)), zPos: posZ, libre: false, special: specialToken[index], figura: loadImageTile(resultArray[index]!), index: index)
+        let newFicha = Ficha(number: resultArray[index]!, position: CGPoint(x: CGFloat.init(posX), y: CGFloat.init(posY)), zPos: posZ, libre: false, special: specialToken[index], figura: loadImageTile(resultArray[index]!), index: index)
         
         return newFicha
     
@@ -193,10 +193,10 @@ class Board {
     
     
     
-    func loadImageTile(numberOfTile: Int) -> SKSpriteNode {
+    func loadImageTile(_ numberOfTile: Int) -> SKSpriteNode {
         
         let figura: SKSpriteNode
-        if tilesSelected == tilesSet.ORIGINAL.hashValue {
+        if tilesSelected == tilesSet.original.hashValue {
             switch numberOfTile {
             case 0:
                 figura = SKSpriteNode.init(imageNamed: "ficha0")
@@ -440,7 +440,7 @@ class Board {
         
         
         switch boardSelected {
-        case boardSet.TURTLE.hashValue:
+        case boardSet.turtle.hashValue:
             //  default:
             
             for z in 0..<boardZ {
@@ -481,13 +481,13 @@ class Board {
                             
                         }
                         if z == 0 && i == 0 && j == 3 {
-                            specialToken.append(specialTokens.TOKEN_DOBLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_DOBLE_NORTH.hashValue)
                         } else if z == 0 && i >= 13 && j == 3 {
-                            specialToken.append(specialTokens.TOKEN_DOBLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_DOBLE_NORTH.hashValue)
                         } else if z == boardZ - 1 && i == 6 && j == 3 {
-                            specialToken.append(specialTokens.TOKEN_QUATUPLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_QUATUPLE_NORTH.hashValue)
                         } else {
-                            specialToken.append(specialTokens.TOKEN_NORMAL.hashValue)
+                            specialToken.append(specialTokens.token_NORMAL.hashValue)
                         }
                         print("Array Tokens Result[\(count)] coor[\(z)][\(i)][\(j)] T=\(resultArray[count])")
                         count += 1
@@ -499,12 +499,12 @@ class Board {
             print("-------------------------------------")
             
             break
-        case boardSet.PYRAMID.hashValue :
+        case boardSet.pyramid.hashValue :
             for z in 0..<boardZ {
                 for i in 0..<boardX {
                     for j in 0..<boardY {
                         
-                        specialToken.append(specialTokens.TOKEN_NORMAL.hashValue)
+                        specialToken.append(specialTokens.token_NORMAL.hashValue)
                         //Draw Piramid
                         if i <= z - 1 {
                             resultArray.append(nil)
@@ -526,7 +526,7 @@ class Board {
             print("-------------------------------------")
             print("-------------------------------------")
             break
-        case boardSet.SPIDER.hashValue:
+        case boardSet.spider.hashValue:
             for z in 0..<boardZ {
                 for i in 0..<boardX {
                     for j in 0..<boardY {
@@ -586,17 +586,17 @@ class Board {
                         }
                         
                         if z == 0 && (i == 0 || i == 14) && (j == 1 || j == 4) {
-                            specialToken.append(specialTokens.TOKEN_DOBLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_DOBLE_NORTH.hashValue)
                         } else if (z == 0 || z == 1) && (i == 1 || i == 13) && (j == 4) {
-                            specialToken.append(specialTokens.TOKEN_DOBLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_DOBLE_NORTH.hashValue)
                         } else if (z == 0 || z == 1) && (i == 2 || i == 12) && (j == 2 || j == 4 || j == 6) {
-                            specialToken.append(specialTokens.TOKEN_DOBLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_DOBLE_NORTH.hashValue)
                         } else if (z == 0) && (i == 3 || i == 11) && (j == 4) {
-                            specialToken.append(specialTokens.TOKEN_DOBLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_DOBLE_NORTH.hashValue)
                         } else if (z == 0 || z == 1) && (i == 4 || i == 10) && (j == 1) {
-                            specialToken.append(specialTokens.TOKEN_DOBLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_DOBLE_NORTH.hashValue)
                         } else {
-                            specialToken.append(specialTokens.TOKEN_NORMAL.hashValue)
+                            specialToken.append(specialTokens.token_NORMAL.hashValue)
                         }
                         
                         count += 1
@@ -605,7 +605,7 @@ class Board {
             }  // end for z
             break
             
-        case boardSet.SPACE_INVADERS.hashValue:
+        case boardSet.space_INVADERS.hashValue:
             for z in 0..<boardZ {
                 for i in 0..<boardX {
                     for j in 0..<boardY {
@@ -661,13 +661,13 @@ class Board {
                         } else {
                             addNewTokeToTheList()
                         }
-                        specialToken.append(specialTokens.TOKEN_NORMAL.hashValue)
+                        specialToken.append(specialTokens.token_NORMAL.hashValue)
                     }  //end for j
                 }  //end for i
             } //end for z
             break
             
-        case boardSet.MS_PACMAN.hashValue:
+        case boardSet.ms_PACMAN.hashValue:
             for z in 0..<boardZ {
                 for i in 0..<boardX {
                     for j in 0..<boardY {
@@ -737,16 +737,16 @@ class Board {
                         }
                         
                         if(z == 3 && i == 3 && (j == 5)) {
-                            specialToken.append(specialTokens.TOKEN_QUATUPLE_NORTH.hashValue)
+                            specialToken.append(specialTokens.token_QUATUPLE_NORTH.hashValue)
                         } else {
-                            specialToken.append(specialTokens.TOKEN_NORMAL.hashValue)
+                            specialToken.append(specialTokens.token_NORMAL.hashValue)
                         }
                         
                     } //end if j
                 }  //end if i
             }  //end if z
             break
-        case boardSet.MARIO_BROS.hashValue:
+        case boardSet.mario_BROS.hashValue:
             for z in 0..<boardZ {
                 for i in 0..<boardX {
                     for j in 0..<boardY {
@@ -801,13 +801,13 @@ class Board {
                         } else {
                             addNewTokeToTheList()
                         }
-                        specialToken.append(specialTokens.TOKEN_NORMAL.hashValue)
+                        specialToken.append(specialTokens.token_NORMAL.hashValue)
                     }  //end if j
                 }  //end if i
             } //end if z
             break
             
-        case boardSet.TETRIS.hashValue:
+        case boardSet.tetris.hashValue:
             for z in 0..<boardZ {
                 for i in 0..<boardX {
                     for j in 0..<boardY {
@@ -867,7 +867,7 @@ class Board {
                         } else {
                             addNewTokeToTheList()
                         }
-                        specialToken.append(specialTokens.TOKEN_NORMAL.hashValue)
+                        specialToken.append(specialTokens.token_NORMAL.hashValue)
                         
                     }  //end if j
                 }  //end if i
@@ -883,20 +883,20 @@ class Board {
         for _ in 0..<boardZ {
             for _ in 0..<boardX {
                 for _ in 0..<boardY {
-                    if specialToken[count] == specialTokens.TOKEN_DOBLE_NORTH.hashValue {
+                    if specialToken[count] == specialTokens.token_DOBLE_NORTH.hashValue {
                         resultArray[count + 1] = resultArray[count]
-                        specialToken[count + 1] = specialTokens.TOKEN_DOBLE_SOUTH.hashValue
+                        specialToken[count + 1] = specialTokens.token_DOBLE_SOUTH.hashValue
                     }
-                    if specialToken[count] == specialTokens.TOKEN_QUATUPLE_NORTH.hashValue {
+                    if specialToken[count] == specialTokens.token_QUATUPLE_NORTH.hashValue {
                         
                         resultArray[count + 1] = resultArray[count]
-                        specialToken[count + 1] = specialTokens.TOKEN_QUATUPLE_SOUTH .hashValue
+                        specialToken[count + 1] = specialTokens.token_QUATUPLE_SOUTH .hashValue
                         
                         resultArray[count + boardY] = resultArray[count]
-                        specialToken[count + boardY] = specialTokens.TOKEN_QUATUPLE_EAST_NORTH.hashValue
+                        specialToken[count + boardY] = specialTokens.token_QUATUPLE_EAST_NORTH.hashValue
                         
                         resultArray[count + boardY + 1] = resultArray[count]
-                        specialToken[count + boardY + 1] = specialTokens.TOKEN_QUATUPLE_EAST_SOUTH.hashValue
+                        specialToken[count + boardY + 1] = specialTokens.token_QUATUPLE_EAST_SOUTH.hashValue
                     }
                     count += 1
                 }  //for j
@@ -920,8 +920,8 @@ class Board {
             
             let aux = arrayNumRepeted[numRamdom] - 1
             if aux == 0 {
-                arrayNumRepeted.removeAtIndex(numRamdom)
-                arrayOfTokens.removeAtIndex(numRamdom)
+                arrayNumRepeted.remove(at: numRamdom)
+                arrayOfTokens.remove(at: numRamdom)
             } else {
                 arrayNumRepeted[numRamdom] = aux
             }

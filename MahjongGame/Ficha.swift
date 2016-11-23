@@ -15,7 +15,7 @@ class Ficha {
     var position: CGPoint?
     var size: CGSize?
     var figura: SKSpriteNode?
-    var special = specialTokens.TOKEN_NORMAL.hashValue
+    var special = specialTokens.token_NORMAL.hashValue
     var selected = false
     var hint = false
     

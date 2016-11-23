@@ -33,12 +33,12 @@ class InGameMenu {
     init(scene: GameplayScene) {
     
         backGround2 = SKSpriteNode(color: orangeColorBackground, size: scene.frame.size)
-        backGround2!.anchorPoint = CGPointMake(0, 0)
+        backGround2!.anchorPoint = CGPoint(x: 0, y: 0)
     
         let menuDecoLeft = SKSpriteNode.init(imageNamed: "menu_deco")
-        menuDecoLeft.size = CGSizeMake(menuDecoLeft.size.width, backGround2!.size.height)
+        menuDecoLeft.size = CGSize(width: menuDecoLeft.size.width, height: backGround2!.size.height)
         let menuDecoRight = SKSpriteNode.init(imageNamed: "menu_deco")
-        menuDecoRight.size = CGSizeMake(menuDecoRight.size.width, backGround2!.size.height)
+        menuDecoRight.size = CGSize(width: menuDecoRight.size.width, height: backGround2!.size.height)
         menuDecoRight.zRotation = CGFloat.init(M_PI)
     
         loadMarkTokens(scene)
@@ -60,16 +60,16 @@ class InGameMenu {
         buttonHelp = TextAndButtons.createdButton()
         buttonExit = TextAndButtons.createdButton()
     
-        backGround2!.position = CGPointMake(CGRectGetMaxX(scene.frame), 0)
-        menuDecoLeft.position = CGPointMake(menuDecoLeft.size.width/2, CGRectGetMidY(scene.frame))
-        menuDecoRight.position = CGPointMake(CGRectGetMaxX(scene.frame) - menuDecoRight.size.width/2, CGRectGetMidY(scene.frame));
+        backGround2!.position = CGPoint(x: scene.frame.maxX, y: 0)
+        menuDecoLeft.position = CGPoint(x: menuDecoLeft.size.width/2, y: scene.frame.midY)
+        menuDecoRight.position = CGPoint(x: scene.frame.maxX - menuDecoRight.size.width/2, y: scene.frame.midY);
         
-        buttonMusic!.position = CGPointMake(scene.frame.size.width/3, (CGRectGetMaxY(scene.frame) / 6) * 4)
-        buttonMark!.position = CGPointMake(scene.frame.size.width/1.5, ficha01!.position.y - ficha01!.size.height/2 - buttonMark!.size.height/2 - 10)
+        buttonMusic!.position = CGPoint(x: scene.frame.size.width/3, y: (scene.frame.maxY / 6) * 4)
+        buttonMark!.position = CGPoint(x: scene.frame.size.width/1.5, y: ficha01!.position.y - ficha01!.size.height/2 - buttonMark!.size.height/2 - 10)
         
         backGround2!.zPosition = 610
         
-        TextAndButtons.drawText("OPTIOS", size: 40, position: CGPointMake(CGRectGetMidX(scene.frame), (CGRectGetMaxY(scene.frame) / 6) * 5.5), scene: backGround2!)
+        TextAndButtons.drawText("OPTIOS", size: 40, position: CGPoint(x: scene.frame.midX, y: (scene.frame.maxY / 6) * 5.5), scene: backGround2!)
         
         backGround2!.addChild(menuDecoLeft)
         backGround2!.addChild(menuDecoRight)
@@ -77,13 +77,13 @@ class InGameMenu {
         backGround2!.addChild(buttonMark!)
         
         //30 in the position is for the font size
-        TextAndButtons.drawText("Sound:", size: 30, position: CGPointMake(scene.frame.size.width/3, buttonMusic!.position.y + buttonMusic!.size.height/2 + 30 / 2 + 15), scene: backGround2!)
+        TextAndButtons.drawText("Sound:", size: 30, position: CGPoint(x: scene.frame.size.width/3, y: buttonMusic!.position.y + buttonMusic!.size.height/2 + 30 / 2 + 15), scene: backGround2!)
         //30 in the position is for the font size
-        TextAndButtons.drawText("Highlight:", size: 30, position: CGPointMake(scene.frame.size.width/1.5, ficha01!.position.y + ficha01!.size.height / 2 + 30 / 2), scene: backGround2!)
-        TextAndButtons.drawButton(buttonResume!, text: "Resume Game", position: CGPointMake(CGRectGetMidX(scene.frame), (CGRectGetMaxY(scene.frame) / 8) * 4), scene: backGround2!)
-        TextAndButtons.drawButton(buttonSelectTiles!, text: "Select Tiles", position: CGPointMake(CGRectGetMidX(scene.frame), (CGRectGetMaxY(scene.frame) / 8) * 3), scene: backGround2!)
-        TextAndButtons.drawButton(buttonHelp!, text: "Help", position: CGPointMake(CGRectGetMidX(scene.frame), (CGRectGetMaxY(scene.frame) / 8) * 2), scene: backGround2!)
-        TextAndButtons.drawButton(buttonExit!, text: "Exit Game", position: CGPointMake(CGRectGetMidX(scene.frame), CGRectGetMaxY(scene.frame) / 8), scene: backGround2!)
+        TextAndButtons.drawText("Highlight:", size: 30, position: CGPoint(x: scene.frame.size.width/1.5, y: ficha01!.position.y + ficha01!.size.height / 2 + 30 / 2), scene: backGround2!)
+        TextAndButtons.drawButton(buttonResume!, text: "Resume Game", position: CGPoint(x: scene.frame.midX, y: (scene.frame.maxY / 8) * 4), scene: backGround2!)
+        TextAndButtons.drawButton(buttonSelectTiles!, text: "Select Tiles", position: CGPoint(x: scene.frame.midX, y: (scene.frame.maxY / 8) * 3), scene: backGround2!)
+        TextAndButtons.drawButton(buttonHelp!, text: "Help", position: CGPoint(x: scene.frame.midX, y: (scene.frame.maxY / 8) * 2), scene: backGround2!)
+        TextAndButtons.drawButton(buttonExit!, text: "Exit Game", position: CGPoint(x: scene.frame.midX, y: scene.frame.maxY / 8), scene: backGround2!)
         
         //in game menu help screen
         inGameMenuHelp = Help(scene: scene)
@@ -95,11 +95,11 @@ class InGameMenu {
     
     
     func showInGameMenu() {
-        backGround2!.runAction(SKAction.moveToX(0, duration: MENU_SPEED))
+        backGround2!.run(SKAction.moveTo(x: 0, duration: MENU_SPEED))
     }
     
     
-    func loadMarkTokens(scene: GameplayScene) {
+    func loadMarkTokens(_ scene: GameplayScene) {
         
         if(tilesSelected == 0) {
             ficha01 = SKSpriteNode.init(imageNamed: "ficha0")
@@ -111,27 +111,27 @@ class InGameMenu {
             ficha03 = SKSpriteNode.init(imageNamed: "fichaM11")
         }
     
-        ficha01!.position = CGPointMake(scene.frame.size.width/1.5 - ficha01!.size.width, ((CGRectGetMaxY(scene.frame) / 6) * 4) + 30)
-        ficha02!.position = CGPointMake(scene.frame.size.width/1.5 - 9, ((CGRectGetMaxY(scene.frame) / 6) * 4) + 30)
-        ficha03!.position = CGPointMake(scene.frame.size.width/1.5 - 9 + ficha01!.size.width - 9, ((CGRectGetMaxY(scene.frame) / 6) * 4) + 30)
+        ficha01!.position = CGPoint(x: scene.frame.size.width/1.5 - ficha01!.size.width, y: ((scene.frame.maxY / 6) * 4) + 30)
+        ficha02!.position = CGPoint(x: scene.frame.size.width/1.5 - 9, y: ((scene.frame.maxY / 6) * 4) + 30)
+        ficha03!.position = CGPoint(x: scene.frame.size.width/1.5 - 9 + ficha01!.size.width - 9, y: ((scene.frame.maxY / 6) * 4) + 30)
     
         let colorRandom = arc4random() % 4
         let  color: SKColor
         switch colorRandom {
         case 0:
-            color = SKColor.redColor()
+            color = SKColor.red
             break
         case 1:
-            color = SKColor.blueColor()
+            color = SKColor.blue
             break
         case 2:
-            color = SKColor.yellowColor()
+            color = SKColor.yellow
             break
         case 3:
-            color = SKColor.purpleColor()
+            color = SKColor.purple
             break
         default:
-            color = SKColor.yellowColor()
+            color = SKColor.yellow
         }
         ficha01!.color = color
         ficha02!.color = color
@@ -153,7 +153,7 @@ class InGameMenu {
         backGround2!.addChild(ficha03!)
     }
     
-    func drawInGameMenu(scene: GameplayScene) {
+    func drawInGameMenu(_ scene: GameplayScene) {
     
       //  if(self.helpState == NO && self.selectTokenState == NO) {
       //  scene.addChild(backGround2!)
@@ -168,7 +168,7 @@ class InGameMenu {
 //        
 
         switch currentState {
-        case gameStates.IN_GAME_MENU.hashValue:
+        case gameStates.in_GAME_MENU.hashValue:
             
             scene.addChild(backGround2!)
             
@@ -176,10 +176,10 @@ class InGameMenu {
                // backGround2!.addChild(windows)
             //}
             break
-        case gameStates.IN_GAME_MENU_HELP.hashValue:
+        case gameStates.in_GAME_MENU_HELP.hashValue:
             inGameMenuHelp!.drawHelpScreen(tilesSelected, scene: scene)
             break
-        case gameStates.IN_GAME_MENU_SELECT_TOKEN.hashValue:
+        case gameStates.in_GAME_MENU_SELECT_TOKEN.hashValue:
             inGameSelectToken!.drawSelectScreen()
         default:
             scene.addChild(backGround2!)
@@ -189,43 +189,43 @@ class InGameMenu {
     }
     
     
-    func exitWindowInScene(scene: GameplayScene) {
+    func exitWindowInScene(_ scene: GameplayScene) {
         
         exitWindow = SKSpriteNode.init(imageNamed: "exitFrame")
-        exitWindow!.position = CGPointMake(CGRectGetMidX(scene.frame), CGRectGetMidY(scene.frame))
+        exitWindow!.position = CGPoint(x: scene.frame.midX, y: scene.frame.midY)
         exitWindow!.zPosition = 604
     
-        TextAndButtons.drawText("Are your sure?", size: 30, position: CGPointMake(0, 100), scene: exitWindow!)
+        TextAndButtons.drawText("Are your sure?", size: 30, position: CGPoint(x: 0, y: 100), scene: exitWindow!)
         
         buttonYes = TextAndButtons.createdButton()
-        TextAndButtons.drawButton(buttonYes!, text: "Yes", position: CGPointMake(0, 0), scene: exitWindow!)
+        TextAndButtons.drawButton(buttonYes!, text: "Yes", position: CGPoint(x: 0, y: 0), scene: exitWindow!)
         
         buttonNo = TextAndButtons.createdButton()
-        TextAndButtons.drawButton(buttonNo!, text: "No", position: CGPointMake(0, -100), scene: exitWindow!)
+        TextAndButtons.drawButton(buttonNo!, text: "No", position: CGPoint(x: 0, y: -100), scene: exitWindow!)
 
         exitWindow!.setScale(0)
     
-        let action1 = SKAction.scaleTo(1.2, duration: 0.5)
-        let action2 = SKAction.scaleTo(1.0, duration: 0.2)
+        let action1 = SKAction.scale(to: 1.2, duration: 0.5)
+        let action2 = SKAction.scale(to: 1.0, duration: 0.2)
     
-        exitWindow!.runAction(SKAction.sequence([action1, action2]))
+        exitWindow!.run(SKAction.sequence([action1, action2]))
     
         backGround2!.addChild(exitWindow!)
     }
     
     
-    func touchScreen(location: CGPoint, scene: GameplayScene, ended: Bool) {
+    func touchScreen(_ location: CGPoint, scene: GameplayScene, ended: Bool) {
         
         if let _ = exitWindow {
             
             //some strange point fixeds
-            let point = CGPointMake(location.x - scene.size.width / 2.0, location.y - scene.size.height / 2.0)
+            let point = CGPoint(x: location.x - scene.size.width / 2.0, y: location.y - scene.size.height / 2.0)
             
             //Yes Button
             if TextAndButtons.checkTouch(point, button: buttonYes!, ended: ended) {
                 if ended {
                     scene.blockUpdate = true
-                    let transition = SKTransition.doorsCloseHorizontalWithDuration(1.5)
+                    let transition = SKTransition.doorsCloseHorizontal(withDuration: 1.5)
                     let toMainMenu = MainMenuScene(size: scene.size, music: scene.soundManager!.activeSounds, mark: scene.board.showSelectableTokens)
                     scene.view?.presentScene(toMainMenu, transition: transition)
                 }
@@ -238,7 +238,7 @@ class InGameMenu {
                 }
             }
         } else {
-            if currentState == gameStates.IN_GAME_MENU.hashValue {
+            if currentState == gameStates.in_GAME_MENU.hashValue {
                 
                 if ended {
                     
@@ -257,7 +257,7 @@ class InGameMenu {
                                 scene.soundManager!.playSound("select.m4a", scene: scene)
                             }
                             
-                            buttonMusic!.position = CGPointMake(scene.frame.size.width / 3, (CGRectGetMaxY(scene.frame) / 6) * 4)
+                            buttonMusic!.position = CGPoint(x: scene.frame.size.width / 3, y: (scene.frame.maxY / 6) * 4)
                             backGround2!.addChild(buttonMusic!)
                             
                         }
@@ -280,7 +280,7 @@ class InGameMenu {
                                 ficha02!.colorBlendFactor = 0.1
                             }
                             scene.updateBoard()
-                            buttonMark!.position = CGPointMake(scene.frame.size.width/1.5, ficha01!.position.y - ficha01!.size.height/2 - buttonMark!.size.height/2 - 10)
+                            buttonMark!.position = CGPoint(x: scene.frame.size.width/1.5, y: ficha01!.position.y - ficha01!.size.height/2 - buttonMark!.size.height/2 - 10)
                             
                             backGround2!.addChild(buttonMark!)
                             
@@ -292,23 +292,23 @@ class InGameMenu {
                 //Resume Button
                 if TextAndButtons.checkTouch(location, button: buttonResume!, ended: ended) {
                     if ended {
-                        backGround2!.runAction(SKAction.sequence([
-                            SKAction.moveToX(CGRectGetMaxX(scene.frame), duration: MENU_SPEED),
-                            SKAction.runBlock({
-                                changeState(gameStates.STATE_GAMEPLAY.hashValue)
+                        backGround2!.run(SKAction.sequence([
+                            SKAction.moveTo(x: scene.frame.maxX, duration: MENU_SPEED),
+                            SKAction.run({
+                                changeState(gameStates.state_GAMEPLAY.hashValue)
                             })]))
                     }
                 }
                 //Select Tiles Button
                 if TextAndButtons.checkTouch(location, button: buttonSelectTiles!, ended: ended) {
                     if ended {
-                        changeState(gameStates.IN_GAME_MENU_SELECT_TOKEN.hashValue)
+                        changeState(gameStates.in_GAME_MENU_SELECT_TOKEN.hashValue)
                     }
                 }
                 //Help Button
                 if TextAndButtons.checkTouch(location, button: buttonHelp!, ended: ended) {
                     if ended {
-                        changeState(gameStates.IN_GAME_MENU_HELP.hashValue)
+                        changeState(gameStates.in_GAME_MENU_HELP.hashValue)
                     }
                 }
                 //Exit Button
@@ -317,10 +317,10 @@ class InGameMenu {
                         exitWindowInScene(scene)
                     }
                 }
-            } else if currentState == gameStates.IN_GAME_MENU_HELP.hashValue {
+            } else if currentState == gameStates.in_GAME_MENU_HELP.hashValue {
                 inGameMenuHelp!.updateHelpScreen(location, ended: ended)
 
-            } else if currentState == gameStates.IN_GAME_MENU_SELECT_TOKEN.hashValue {
+            } else if currentState == gameStates.in_GAME_MENU_SELECT_TOKEN.hashValue {
                 if inGameSelectToken!.updateSelectBoardScreen(location, ended: ended) {
                     
                     for z in 0..<scene.tilesInBoard!.count {
